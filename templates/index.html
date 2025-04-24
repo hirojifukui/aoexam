@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>音声インタビューツール</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <h1>🎤 音声インタビュー</h1>
+
+    <!-- Step1 -->
+    <div id="step1">
+      <textarea id="motivation" placeholder="ここに志望理由を貼り付け"></textarea>
+      <input type="file" id="fileUpload" accept=".txt" />
+      <button id="btnNext">次へ</button>
+    </div>
+
+    <!-- Step2 -->
+    <div id="step2" class="hidden">
+      <label for="interviewer">インタビュアータイプ:</label>
+      <select id="interviewer">
+        {% for key, val in scripts.items() %}
+          <option value="{{ key }}">{{ key }}</option>
+        {% endfor %}
+      </select>
+      <button id="btnStart">面接開始</button>
+    </div>
+
+    <!-- Step3 -->
+    <div id="step3" class="hidden">
+      <div id="questionArea"></div>
+      <button id="btnPlayQ">質問を再生</button>
+      <button id="btnRecord">録音開始</button>
+      <button id="btnStop" disabled>録音停止</button>
+      <button id="btnEnd">面接終了</button>
+      <audio id="player" controls hidden></audio>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

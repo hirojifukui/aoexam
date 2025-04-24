@@ -1,0 +1,7 @@
+venv/
+*.ipynb
+*.toml
+.streamlit/
+*.ini
+*.txt
+.env
