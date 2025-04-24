@@ -15,10 +15,18 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=OPENAI_API_KEY)
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = "uploads"
-os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
+try:
+    os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
+except:
+    print("Error making /upload folder")
+print("Before load json")
 # 面接官タイプごとのプロンプトテンプレート読み込み
-with open("interview_scripts.json", "r", encoding="utf-8") as f:
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+json_path = os.path.join(BASE_DIR, "interview_scripts.json")
+with open(json_path, "r", encoding="utf-8") as f:
     SCRIPTS = json.load(f)
+# with open("interview_scripts.json", "r", encoding="utf-8") as f:
+#     SCRIPTS = json.load(f)
 
 @app.route("/")
 def index():
