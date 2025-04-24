@@ -2,8 +2,12 @@ import os
 import json
 import tempfile
 from flask import Flask, request, render_template, jsonify, redirect, url_for
+print("Loaded Flask")
 from openai import OpenAI
+print("LOaded OpenAI")
 from dotenv import load_dotenv
+
+print("End import")
 
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -12,7 +16,6 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = "uploads"
 os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
-
 # 面接官タイプごとのプロンプトテンプレート読み込み
 with open("interview_scripts.json", "r", encoding="utf-8") as f:
     SCRIPTS = json.load(f)
