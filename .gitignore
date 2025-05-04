@@ -3,5 +3,6 @@ venv/
 *.toml
 .streamlit/
 *.ini
-*.txt
-.env
+*.env
+__pycache__/
+*.pyc
